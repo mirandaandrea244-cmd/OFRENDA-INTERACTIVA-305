@@ -1,0 +1,326 @@
+/* ============ Paleta ============ */
+:root {
+    --noche: #120a24;
+    --morado: #2a1245;
+    --ciruela: #4a1942;
+    --cempasuchil: #ffb300;
+    --naranja: #ff6d00;
+    --rosa: #ff4081;
+    --crema: #fff3e0;
+}
+
+* { box-sizing: border-box; }
+
+/* ============ Fondo ============ */
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    color: var(--crema);
+    text-align: center;
+    background:
+        /* estrellitas */
+        radial-gradient(circle at 12% 18%, rgba(255,255,255,.9) 0 1px, transparent 2px),
+        radial-gradient(circle at 28% 42%, rgba(255,255,255,.7) 0 1px, transparent 2px),
+        radial-gradient(circle at 47% 12%, rgba(255,255,255,.8) 0 1px, transparent 2px),
+        radial-gradient(circle at 63% 35%, rgba(255,255,255,.6) 0 1px, transparent 2px),
+        radial-gradient(circle at 78% 20%, rgba(255,255,255,.9) 0 1px, transparent 2px),
+        radial-gradient(circle at 90% 48%, rgba(255,255,255,.7) 0 1px, transparent 2px),
+        radial-gradient(circle at 8% 66%, rgba(255,255,255,.6) 0 1px, transparent 2px),
+        radial-gradient(circle at 92% 78%, rgba(255,255,255,.8) 0 1px, transparent 2px),
+        /* resplandor de las velas desde abajo */
+        radial-gradient(ellipse at 50% 105%, rgba(255,152,0,.45), transparent 60%),
+        /* nube morada */
+        radial-gradient(circle at 18% 22%, rgba(171,71,188,.30), transparent 50%),
+        /* cielo nocturno */
+        linear-gradient(180deg, var(--noche) 0%, var(--morado) 55%, var(--ciruela) 100%);
+    background-attachment: fixed;
+}
+
+/* ============ Escena ============ */
+.escena {
+    position: relative;
+    z-index: 2;
+    padding: 130px 16px 60px;
+}
+
+h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    margin: 0;
+    background: linear-gradient(180deg, #ffe082 0%, var(--cempasuchil) 50%, var(--naranja) 100%);
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    filter: drop-shadow(0 0 14px rgba(255,152,0,.6));
+}
+
+.subtitulo {
+    margin: 8px 0 34px;
+    font-weight: 300;
+    font-size: 1.05rem;
+    letter-spacing: .04em;
+    color: rgba(255,243,224,.85);
+}
+
+/* ============ Altar: velas + foto ============ */
+.altar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 110px;
+}
+
+.ofrenda {
+    position: relative;
+}
+
+.marco {
+    position: relative;
+    margin: 0;
+    padding: 12px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #ffca28, var(--naranja) 50%, #ffca28);
+    box-shadow:
+        0 0 0 3px rgba(255,255,255,.12),
+        0 0 45px rgba(255,152,0,.55),
+        0 22px 40px rgba(0,0,0,.6);
+}
+
+/* flores de cempasúchil en las esquinas del marco */
+.marco::before,
+.marco::after {
+    position: absolute;
+    font-size: 2.1rem;
+    line-height: 1;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,.5));
+}
+.marco::before { content: '🌼'; top: -18px; left: -18px; }
+.marco::after  { content: '🌼'; bottom: -18px; right: -18px; }
+
+#imagenOfrenda {
+    display: block;
+    width: auto;
+    height: auto;
+    min-width: 220px;
+    max-width: min(400px, 78vw);
+    max-height: 70vh;
+    border: 6px solid var(--crema);
+    border-radius: 12px;
+    transition: opacity .3s ease, transform .3s ease;
+}
+#imagenOfrenda.cambiando {
+    opacity: 0;
+    transform: scale(.97);
+}
+
+/* ============ Flechas ============ */
+.flecha {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    padding: 0 0 4px;
+    border: 2px solid rgba(255,243,224,.85);
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ff7eb0, var(--rosa) 60%, #c2185b);
+    color: #fff;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,.5), 0 0 14px rgba(255,64,129,.5);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+.flecha:hover {
+    transform: translateY(-50%) scale(1.12);
+    box-shadow: 0 4px 14px rgba(0,0,0,.5), 0 0 24px rgba(255,64,129,.9);
+}
+#anterior  { left: -66px; }
+#siguiente { right: -66px; }
+
+/* ============ Puntos ============ */
+.puntos {
+    margin-top: 30px;
+}
+.punto {
+    width: 12px;
+    height: 12px;
+    margin: 0 6px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,243,224,.45);
+    cursor: pointer;
+    transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.punto:hover { background: rgba(255,243,224,.8); }
+.punto.activo {
+    background: var(--cempasuchil);
+    transform: scale(1.4);
+    box-shadow: 0 0 10px var(--cempasuchil);
+}
+
+/* ============ Botón de música ============ */
+.btn-musica {
+    margin-top: 28px;
+    padding: 12px 28px;
+    border: 2px solid #ffca28;
+    border-radius: 999px;
+    background: rgba(255,152,0,.15);
+    color: var(--crema);
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: background .2s ease, transform .2s ease;
+}
+.btn-musica:hover {
+    background: rgba(255,152,0,.35);
+    transform: translateY(-2px);
+}
+.btn-musica.sonando {
+    animation: latido 2.4s ease-in-out infinite;
+}
+
+/* ============ Velas ============ */
+.vela {
+    position: relative;
+    width: 28px;
+    height: 120px;
+    flex: 0 0 auto;
+}
+.vela .cuerpo {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 85px;
+    border-radius: 5px 5px 3px 3px;
+    background: linear-gradient(90deg, #e8d3a6, #fff6e0 45%, #e8d3a6);
+    box-shadow: 0 0 25px rgba(255,170,0,.25);
+}
+.vela .llama {
+    position: absolute;
+    bottom: 84px;
+    left: 50%;
+    width: 16px;
+    height: 32px;
+    margin-left: -8px;
+    border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+    background: radial-gradient(ellipse at 50% 72%, #fffbe0 0%, #ffd54f 35%, #ff9800 65%, rgba(255,109,0,0) 72%);
+    box-shadow: 0 0 28px 12px rgba(255,160,0,.5);
+    transform-origin: 50% 100%;
+    animation: parpadeo 1.5s ease-in-out infinite alternate;
+}
+.vela:nth-child(3) .llama { animation-duration: 1.9s; animation-delay: -.6s; }
+
+/* ============ Papel picado ============ */
+.papel-picado {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    width: 100%;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    pointer-events: none;
+}
+.papel-picado::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255,243,224,.55);
+}
+.banderin {
+    flex: 0 0 auto;
+    width: 72px;
+    height: 94px;
+    margin: 6px 3px 0;
+    background: var(--color, #ff9800);
+    transform-origin: 50% 0;
+    animation: ondear 3.2s ease-in-out infinite alternate;
+    /* borde inferior en zigzag */
+    clip-path: polygon(0 0, 100% 0, 100% 86%, 90% 100%, 80% 86%, 70% 100%, 60% 86%, 50% 100%,
+                       40% 86%, 30% 100%, 20% 86%, 10% 100%, 0 86%);
+    /* agujeritos del papel picado */
+    -webkit-mask-image:
+        radial-gradient(circle at 50% 42%, transparent 0 8px, #000 9px),
+        radial-gradient(circle at 50% 42%, #000 0 17px, transparent 18px 22px, #000 23px),
+        radial-gradient(circle at 18% 76%, transparent 0 3px, #000 4px),
+        radial-gradient(circle at 82% 76%, transparent 0 3px, #000 4px);
+    -webkit-mask-composite: source-in;
+            mask-image:
+        radial-gradient(circle at 50% 42%, transparent 0 8px, #000 9px),
+        radial-gradient(circle at 50% 42%, #000 0 17px, transparent 18px 22px, #000 23px),
+        radial-gradient(circle at 18% 76%, transparent 0 3px, #000 4px),
+        radial-gradient(circle at 82% 76%, transparent 0 3px, #000 4px);
+            mask-composite: intersect;
+}
+
+/* ============ Pétalos ============ */
+.petalos {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+}
+.petalo {
+    position: absolute;
+    top: -30px;
+    border-radius: 0 100% 0 100%;
+    background: linear-gradient(135deg, #ffd54f, #ff8f00);
+    opacity: .85;
+    animation: caer linear infinite;
+}
+
+/* ============ Animaciones ============ */
+@keyframes parpadeo {
+    0%   { transform: scale(1, 1)      rotate(-2deg); opacity: .95; }
+    40%  { transform: scale(.92, 1.08) rotate(1.5deg); opacity: 1; }
+    100% { transform: scale(1.06, .94) rotate(-1deg); opacity: .9; }
+}
+@keyframes ondear {
+    from { transform: rotate(-4deg); }
+    to   { transform: rotate(4deg); }
+}
+@keyframes caer {
+    0%   { transform: translate3d(0, -5vh, 0) rotate(0deg); }
+    50%  { transform: translate3d(var(--vaiven, 40px), 55vh, 0) rotate(180deg); }
+    100% { transform: translate3d(0, 110vh, 0) rotate(360deg); }
+}
+@keyframes latido {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,179,0,.0); }
+    50%      { box-shadow: 0 0 22px 4px rgba(255,179,0,.55); }
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 900px) {
+    .vela { display: none; }
+    #anterior  { left: -14px; }
+    #siguiente { right: -14px; }
+    .escena { padding-top: 120px; }
+}
+
+/* ============ Foco visible y menos movimiento ============ */
+button:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .petalos { display: none; }
+    .banderin, .llama, .btn-musica.sonando { animation: none; }
+    #imagenOfrenda { transition: none; }
+}

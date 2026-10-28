@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Ofrenda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <!-- Decoración de fondo -->
+    <div class="papel-picado" id="papelPicado" aria-hidden="true"></div>
+    <div class="petalos" id="petalos" aria-hidden="true"></div>
+
+    <main class="escena">
+        <h1>Mi Ofrenda</h1>
+        <p class="subtitulo">Hoy te recordamos con amor, con flores y con luz.<br>Mientras vivas en nuestra memoria, nunca te habrás ido.</p>
+
+        <div class="altar">
+            <div class="vela" aria-hidden="true">
+                <span class="llama"></span>
+                <span class="cuerpo"></span>
+            </div>
+
+            <div class="ofrenda">
+                <button id="anterior" class="flecha" aria-label="Foto anterior">&#8249;</button>
+
+                <figure class="marco">
+                    <img id="imagenOfrenda" src="abu.jpeg" alt="Foto de mi ser querido">
+                </figure>
+
+                <button id="siguiente" class="flecha" aria-label="Foto siguiente">&#8250;</button>
+            </div>
+
+            <div class="vela" aria-hidden="true">
+                <span class="llama"></span>
+                <span class="cuerpo"></span>
+            </div>
+        </div>
+
+        <div class="puntos" id="puntos"></div>
+
+        <button id="btnMusica" class="btn-musica">🎵 Reproducir música</button>
+    </main>
+
+    <audio id="musica" loop>
+        <source src="audio/llorona.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="app.js"></script>
+</body>
+</html>
